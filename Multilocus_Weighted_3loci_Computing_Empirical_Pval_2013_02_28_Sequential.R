@@ -519,8 +519,8 @@ for (phenotype in 0:0){
             
             # ------------------------------------------------------ #
             
-            write.csv2(ResultsMultilocus, file = paste(path,"/MultilocusTDT_Output/Results/","weighted_res_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".csv",sep=""), quote=F, row.names=F)
-            write.table(round(transmat,1), file = paste(path,"/MultilocusTDT_Output/Results/","weighted_transmat_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".txt",sep=""), sep="\t", quote=F)
+            write.csv2(ResultsMultilocus, file = paste(path,"/MultilocusTDT_Output/Results_Seq/","weighted_res_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".csv",sep=""), quote=F, row.names=F)
+            write.table(round(transmat,1), file = paste(path,"/MultilocusTDT_Output/Results_Seq/","weighted_transmat_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".txt",sep=""), sep="\t", quote=F)
             
             ######################################################
             ######################################################
@@ -533,7 +533,7 @@ for (phenotype in 0:0){
 
 	    stime <- system.time({
 
-            SimTestStat <- foreach (sim=1:nbsimul, .combine=rbind) %dopar% {
+            SimTestStat <- foreach (sim=1:nbsimul, .combine=rbind) %do% { # altered for sequential run
                 # for (sim in 1:nbsimul) {
                 
                 gendata2simulated = gendata2saved
@@ -859,7 +859,7 @@ for (phenotype in 0:0){
 	    
 	    (stime) 
 		
-            write.table(SimTestStat, file = paste(path,"/MultilocusTDT_Output/Results/","weighted_SimTestStat_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".txt",sep=""), quote=F, row.names=F, col.names=F)
+            write.table(SimTestStat, file = paste(path,"/MultilocusTDT_Output/Results_Seq/","weighted_SimTestStat_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".txt",sep=""), quote=F, row.names=F, col.names=F)
             
             # ------------------------------------------------------ #
             empPval = NULL
@@ -884,7 +884,7 @@ for (phenotype in 0:0){
             rm(p,q,j)
             
             # ------------------------------------------------------ #
-            write.csv2(ResultsMultilocus, file = paste(path,"/MultilocusTDT_Output/Results/","weighted_res_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".csv",sep=""), quote=F, row.names=F)
+            write.csv2(ResultsMultilocus, file = paste(path,"/MultilocusTDT_Output/Results_Seq/","weighted_res_multilocus_",gene,"_phen",phenotype,"_","village",paste(village1,village2,sep=""),".csv",sep=""), quote=F, row.names=F)
             
             ######################################################
             ######################################################
